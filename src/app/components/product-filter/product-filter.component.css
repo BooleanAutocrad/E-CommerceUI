@@ -1,0 +1,8 @@
+.example-section{
+    display: flex;
+    flex-direction: column;
+}
+
+.revertButton{
+    margin-top: 10px;
+}

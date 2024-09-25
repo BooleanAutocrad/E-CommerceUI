@@ -1,0 +1,54 @@
+.productCard {
+  margin: 5px;
+  border: rgba(0, 0, 0, 0.096) 1px solid;
+  border-radius: 5px;
+  max-width: 300px;
+  height: 320px;
+  width: 300px;
+  position: relative;
+}
+
+.outOfStockMessage {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: red;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 3px;
+  font-weight: bold;
+}
+
+.imageContainer {
+  display: flex;
+  justify-content: center;
+}
+
+img {
+  width: auto;
+}
+
+.cardBody a {
+  color: black;
+}
+.cardBody {
+  padding: 10px;
+  height: 95px;
+}
+.ratingAndAddToCartContainer {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.addToCartButton {
+  border-radius: 50%;
+}
+
+.addToCartButton i {
+  font-size: 20px;
+}
+.cardTitle:hover{
+  cursor: pointer;
+}

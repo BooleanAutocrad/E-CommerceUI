@@ -1,0 +1,46 @@
+.categoryContainer {
+    display: flex;
+    white-space: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    margin-top: 5px;
+    height: 55px;
+    align-items: top;
+}
+
+.categoryContainer::-webkit-scrollbar {
+    display: none;
+}
+
+.categoryChip {
+    display: flex;
+    margin: 5px;
+    padding: 5px 15px;
+    border: 2px solid #38BF87;
+    border-radius: 25px;
+    white-space: nowrap;
+    max-height: 35px;
+    align-items: center;
+}
+
+.categoryChip:hover {
+    background: #8FE1A2;
+    border: 2px solid #38BF87;
+    color: white;
+    cursor: pointer;
+}
+
+.categoryChip.selected {
+    background: #8FE1A2;
+    border: 2px solid #38BF87;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+    transform: translateY(-4px);
+}
+
+.categoryChip.selected:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.5);
+}

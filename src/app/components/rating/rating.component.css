@@ -1,0 +1,35 @@
+.stars {
+  color: gold;
+  padding-right: 5px;
+}
+i {
+  font-size: 20px;
+  margin-right: 5px;
+}
+.outOf {
+  font-size: 18px;
+  color: #000;
+  margin-bottom: 5px;
+}
+
+.ratingPopup {
+  width: 200px;
+  color: #000;
+  text-align: left;
+  padding: 10px;
+}
+
+.globalRating {
+  font-size: 14px;
+  margin-bottom: 5px;
+  opacity: 0.8;
+}
+.seeCustomerReview {
+  display: flex;
+  justify-content: center;
+  font-size: 14px;
+}
+
+hr {
+  margin: 2px;
+}

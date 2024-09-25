@@ -1,0 +1,7 @@
+.example-section{
+    display: flex;
+    flex-direction: column;
+}
+.dateContainer{
+    margin: 20px 0;
+}

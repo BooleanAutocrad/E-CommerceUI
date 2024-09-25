@@ -1,0 +1,133 @@
+<div class="addReview">
+  <button
+    class="btn btn-primary bi bi-plus-circle"
+    (click)="addReview()"
+    data-bs-toggle="tooltip"
+    data-bs-placement="bottom"
+    data-bs-title="Add Review"
+    [disabled]="hasUserReviewed() || !userHasOrderedProduct"
+  >
+    Add Review
+  </button>
+</div>
+
+<div class="reviewDetailsContainer">
+  <div class="review">
+    <div class="reviewList">
+      <div *ngFor="let review of product.reviews" class="reviewItem">
+        <div class="reviewerName">
+          <p><i class="bi bi-person-circle"></i>{{ review.user.userName }}</p>
+        </div>
+        <div class="reviewerRating" (mouseleave)="resetHover()">
+          <ng-container *ngIf="isEditing(review); else displayStars">
+            <ng-container *ngFor="let star of getStars(5); let i = index">
+              <i
+                class="bi"
+                [ngClass]="
+                  (hoveredRating ?? 0) >= i + 1
+                    ? 'bi-star-fill'
+                    : review.rating >= i + 1
+                    ? 'bi-star-fill'
+                    : 'bi-star'
+                "
+                (click)="updateRating(review, i + 1)"
+                (mouseenter)="hoveredRating = i + 1"
+                style="cursor: pointer"
+              ></i>
+            </ng-container>
+          </ng-container>
+          <ng-template #displayStars>
+            <ng-container
+              *ngFor="let star of getStars(review.rating); let i = index"
+            >
+              <i
+                class="bi"
+                [ngClass]="i < review.rating ? 'bi-star-fill' : 'bi-star'"
+              ></i>
+            </ng-container>
+          </ng-template>
+        </div>
+        <div class="reviewerComment">
+          <ng-container *ngIf="isEditing(review); else displayComment">
+            <textarea
+              [(ngModel)]="review.review"
+              class="form-control"
+            ></textarea>
+          </ng-container>
+          <ng-template #displayComment>
+            <p>{{ review.review }}</p>
+          </ng-template>
+        </div>
+        <div
+          class="editReview"
+          *ngIf="checkIfCurrentUserCanEditReview(review.user)"
+        >
+          <button
+            *ngIf="!isEditing(review)"
+            class="btn btn-primary bi bi-pen editReviewButton"
+            (click)="editReview(review)"
+            data-bs-toggle="tooltip"
+            data-bs-placement="bottom"
+            data-bs-title="Edit Review"
+          ></button>
+
+          <button
+            *ngIf="isEditing(review)"
+            class="btn btn-success bi bi-check"
+            (click)="saveReview(review)"
+            data-bs-toggle="tooltip"
+            data-bs-placement="bottom"
+            data-bs-title="Save Review"
+          ></button>
+
+          <button
+            *ngIf="isEditing(review)"
+            class="btn btn-secondary bi bi-x"
+            (click)="cancelEdit(review)"
+            data-bs-toggle="tooltip"
+            data-bs-placement="bottom"
+            data-bs-title="Cancel"
+          ></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="newReview" *ngIf="addingNewReview">
+      <div class="reviewerName">
+        <p><i class="bi bi-person-circle"></i> {{ currentUser?.userName }}</p>
+      </div>
+      <div class="reviewerRating">
+        <ng-container *ngFor="let star of getStars(5); let i = index">
+          <i
+            class="bi"
+            [ngClass]="
+              (hoveredRating ?? 0) >= i + 1
+                ? 'bi-star-fill'
+                : newReview.rating >= i + 1
+                ? 'bi-star-fill'
+                : 'bi-star'
+            "
+            (click)="newReview.rating = i + 1"
+            (mouseenter)="hoveredRating = i + 1"
+            style="cursor: pointer"
+          ></i>
+        </ng-container>
+      </div>
+
+      <div class="reviewerComment"></div>
+      <textarea
+        [(ngModel)]="newReview.review"
+        class="form-control"
+        placeholder="Write your review here"
+      ></textarea>
+    </div>
+    <div class="addReviewButtons" *ngIf="addingNewReview">
+      <button class="btn btn-success" (click)="submitNewReview()">
+        Submit
+      </button>
+      <button class="btn btn-secondary" (click)="cancelAddReview()">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>

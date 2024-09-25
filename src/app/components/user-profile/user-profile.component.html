@@ -1,0 +1,93 @@
+<div class="container mt-5">
+  <h1>My Profile</h1>
+  <hr />
+  <form [formGroup]="userData" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="userName" class="form-label">Username</label>
+      <input
+        type="text"
+        id="userName"
+        class="form-control"
+        formControlName="userName"
+      />
+      <div
+        *ngIf="
+          userData.get('userName')?.invalid && userData.get('userName')?.touched
+        "
+        class="text-danger"
+      >
+        Username is required and must be at least 3 characters long.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="emailId" class="form-label">Email</label>
+      <input
+        type="emailId"
+        id="emailId"
+        class="form-control"
+        formControlName="emailId"
+      />
+      <div
+        *ngIf="userData.get('emailId')?.invalid && userData.get('emailId')?.touched"
+        class="text-danger"
+      >
+        A valid email is required.
+      </div>
+    </div>
+
+    <div class="mb-3" *ngIf="isEditingPassword">
+      <label for="password" class="form-label">Enter New Password</label>
+      <input
+        id="password"
+        formControlName="password"
+        type="password"
+        class="form-control"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="address" class="form-label">Address</label>
+      <input
+        type="text"
+        id="address"
+        class="form-control"
+        formControlName="address"
+      />
+      <div
+        *ngIf="
+          userData.get('address')?.invalid && userData.get('address')?.touched
+        "
+        class="text-danger"
+      >
+        Address is required.
+      </div>
+    </div>
+
+    <button
+      *ngIf="!userData.disabled"
+      type="submit"
+      class="btn btn-outline-success"
+      [disabled]="userData.invalid"
+    >
+      Save Changes
+    </button>
+
+    <button
+      type="button"
+      (click)="toggleEdit()"
+      [ngClass]="userData.disabled ? 'btn btn-success' : 'btn btn-danger'"
+    >
+      {{ userData.disabled ? "Edit Profile" : "Cancel" }}
+    </button>
+
+    <button
+      type="button"
+      *ngIf="userData.disabled"
+      (click)="toggleEditPassword()"
+      class="btn btn-danger"
+    >
+      Edit Password
+    </button>
+  </form>
+</div>

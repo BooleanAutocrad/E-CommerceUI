@@ -1,0 +1,38 @@
+<div class="productCard bg-light">
+  <div *ngIf="product.productStock === 0" class="outOfStockMessage">
+    Out of Stock
+  </div>
+  <div class="imageContainer">
+    <img
+    width="150"
+    height="150"
+      src="{{ product.productImageURL }}"
+      alt="Card image"
+      class="border-0 border-secondary-subtle rounded"
+      
+    />
+  </div>
+
+  <div class="cardBody">
+    <a class="cardTitle" (click)="openProductDetails(product.productId)">{{
+      product.productName
+    }}</a>
+    <p class="card-text">{{ product.productPrice }}/-</p>
+  </div>
+  <div class="ratingAndAddToCartContainer">
+    <app-review [product]="product"></app-review>
+
+    <button
+      (click)="addToCart(product)"
+      class="btn btn-outline-primary addToCartButton"
+      data-bs-toggle="tooltip"
+      data-bs-placement="bottom"
+      data-bs-title="Add to cart"
+      [disabled]="product.productStock === 0"
+    >
+      <i class="bi bi-plus" aria-hidden="true"></i>
+    </button>
+  </div>
+</div>
+
+<app-toast></app-toast>

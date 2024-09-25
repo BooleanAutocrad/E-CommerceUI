@@ -1,0 +1,93 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <div class="navbarContainer">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <a class="navbar-brand" routerLink="/">
+        <img
+          src="../../../assets/BuyBlissLOGO.png"
+          alt="Bootstrap"
+          width="170"
+          height="50"
+        />
+      </a>
+
+      <div class="searchContainer">
+        <form *ngIf="!isLoginPage() && !isProfilePage()" class="d-flex" role="search" (submit)="onSearch()">
+          <input
+            [(ngModel)]="searchQuery"
+            class="form-control me-2 searchBar"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+            name="searchInput"
+          />
+          <button
+            *ngIf="!isLoginPage() || !isProfilePage()"
+            class="btn btn-outline-success searchButton"
+            type="submit"
+          >
+            <i class="bi bi-search"></i>
+          </button>
+        </form>
+        
+      </div>
+    </div>
+
+    <div class="collapse navbar-collapse ms-auto" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 cartAndUser">
+        <li *ngIf="!isUserLoggedIn()">
+          <button
+            *ngIf="!isLoginPage()"
+            class="btn btn-outline-primary"
+            routerLink="/login"
+            type="submit"
+          >
+            Login
+          </button>
+        </li>
+        <li class="nav-item" *ngIf="isUserLoggedIn()">
+          <div class="cartContainer">
+            <div class="nav-link cart" routerLink="/cart">
+              <i class="bi bi-cart3 wiggle-on-hover">
+              </i>
+              <div class="MyCartText" *ngIf="numberOfProducts < 1">My Cart</div>
+              <div class="itemPresent" *ngIf="numberOfProducts >= 1">
+                <div>{{ numberOfProducts }} items</div>
+                <div>₹{{ totalAmountOfCart }}</div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="nav-item dropdown" *ngIf="isUserLoggedIn()">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <i class="bi bi-person-circle"></i>
+            User
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" routerLink="/profile">Profile</a></li>
+            <li><a class="dropdown-item" routerLink="/order">Orders</a></li>
+            <li><hr class="dropdown-divider" /></li>
+            <li><a class="dropdown-item" (click)="logoutUser()">Log Out</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

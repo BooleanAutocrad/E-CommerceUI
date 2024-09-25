@@ -1,0 +1,11 @@
+<div class="categoryContainer" *ngIf="categories.length > 0">
+  <div
+    class="categoryChip"
+    *ngFor="let category of categories"
+    (click)="selectCategory(category)"
+    [ngClass]="{'selected': category.selected}"
+  >
+    {{ category.categoryName }}
+  </div>
+</div>
+<div *ngIf="categories.length === 0">No categories available.</div>

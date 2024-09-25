@@ -1,0 +1,65 @@
+<div *ngIf="cart && cart?.cartItems?.length !== 0" class="cartContainer">
+  <h2>Your Cart</h2>
+  <div *ngFor="let item of cart.cartItems">
+    <div class="cartItemProductContainer">
+      <div class="cartItemProductImage">
+        <img
+          width="150"
+          height="150"
+          [src]="item.product.productImageURL"
+          alt="Product Image"
+          class="cart-item-image"
+        />
+      </div>
+      <div class="cartItemProductDetails">
+        <a href="#" class="productName">{{ item.product.productName }}</a>
+        <p class="productPrice">₹ {{ item.product.productPrice }}/-</p>
+        <p>
+          Quantity:
+          <button
+            class="btn btn-outline-success quantity"
+            (click)="increaseQuantity(item.product.productId)"
+          >
+            <i class="bi bi-plus"></i>
+          </button>
+          {{ item.quantity }}
+          <button
+            [disabled]="item.quantity <= 1"
+            class="btn btn-outline-danger quantity"
+            (click)="decreaseQuantity(item.product.productId)"
+          >
+            <i class="bi bi-dash"></i>
+          </button>
+        </p>
+        <button
+          class="btn btn-outline-danger bi bi-trash"
+          (click)="removeFromCart(item.cartItemId)"
+        ></button>
+      </div>
+      <div
+        class="BuyNow"
+        (click)="buyNow(item.quantity, item.product.productId, item.cartItemId)"
+      >
+        Buy Now
+      </div>
+    </div>
+    <hr *ngIf="cart.cartItems.length > 1" />
+  </div>
+
+  <hr />
+  <div class="cartTotal">
+    <h3>Total Amount: {{ cart.totalAmount }}</h3>
+    <button class="btn btn-primary" (click)="confirmCheckout()">Checkout</button>
+  </div>
+</div>
+<div
+  *ngIf="!cart || cart.cartItems.length === 0"
+  class="cartContainer emptyCart"
+>
+  <div>
+    <h2>Your cart is empty.</h2>
+  </div>
+  <div>
+    <a routerLink="/" class="link-opacity-100">Go to view Products -></a>
+  </div>
+</div>

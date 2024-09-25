@@ -1,0 +1,48 @@
+<div class="productDetailsContainer">
+  <div class="productDetails">
+    <div *ngIf="product.productStock === 0" class="outOfStockMessage">
+      Out of Stock
+    </div>
+    <div class="productImage">
+      <img [src]="product.productImageURL" alt="product.name" />
+    </div>
+    <div class="productInfo">
+      <div class="productName">
+        <h3>{{ product.productName }}</h3>
+      </div>
+      <div class="productCategory">
+        <p>{{ product.category.categoryName }}</p>
+      </div>
+      <div class="orderCount">
+        <p>{{ product.orderCount }} bought in last month</p>
+      </div>
+
+      <hr />
+      <div class="productPriceContainer">
+        <div class="price" *ngIf="product.productStock > 0">
+          <div>MRP</div>
+          <div>₹ {{ product.productPrice }}</div>
+        </div>
+        <div class="price" *ngIf="product.productStock == 0">Out Of Stock</div>
+
+        <div class="addToCartContainer">
+          <button
+            (click)="addToCart(product)"
+            class="btn btn-outline-primary addToCartButton"
+            data-bs-toggle="tooltip"
+            data-bs-placement="bottom"
+            data-bs-title="Add to cart"
+            [disabled]="product.productStock === 0"
+          >
+            <i class="bi bi-plus" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+
+      <app-rating [product]="product"></app-rating>
+    </div>
+  </div>
+  <app-detailed-review [product]="product"></app-detailed-review>
+</div>
+
+<app-toast></app-toast>

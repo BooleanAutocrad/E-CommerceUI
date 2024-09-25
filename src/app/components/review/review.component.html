@@ -1,0 +1,79 @@
+<div class="reviewSection">
+  <p class="averageRating">
+    <span class="stars">
+      <ng-container
+        *ngFor="let star of getStars(product.averageRating); let i = index"
+      >
+        <i
+          class="bi bigStar"
+          [ngClass]="i < product.averageRating ? 'bi-star-fill' : 'bi-star'"
+        ></i>
+      </ng-container>
+    </span>
+    {{ product.userReviewCount }}
+    <span class="ratingPopup">
+      <p class="outOf">
+        <span class="stars">
+          <ng-container
+            *ngFor="let star of getStars(product.averageRating); let i = index"
+          >
+            <i
+              class="bi"
+              [ngClass]="i < product.averageRating ? 'bi-star-fill' : 'bi-star'"
+            ></i>
+          </ng-container>
+        </span>
+        {{ product.averageRating }} out of 5
+      </p>
+      <p class="globalRating">{{product.userReviewCount}} global rating</p>
+      <div>
+        <div>
+          <span class="stars">
+            <ng-container *ngFor="let star of getStars(5); let i = index">
+              <i class="bi" [ngClass]="i < 5 ? 'bi-star-fill' : 'bi-star'"></i>
+            </ng-container>
+          </span>
+          {{ product.ratingCounts.count5 }}
+        </div>
+        <div>
+          <span class="stars">
+            <ng-container *ngFor="let star of getStars(4); let i = index">
+              <i class="bi" [ngClass]="i < 4 ? 'bi-star-fill' : 'bi-star'"></i>
+            </ng-container>
+          </span>
+          {{ product.ratingCounts.count4 }}
+        </div>
+        <div>
+          <span class="stars">
+            <ng-container *ngFor="let star of getStars(3); let i = index">
+              <i class="bi" [ngClass]="i < 3 ? 'bi-star-fill' : 'bi-star'"></i>
+            </ng-container>
+          </span>
+          {{ product.ratingCounts.count3 }}
+        </div>
+        <div>
+          <span class="stars">
+            <ng-container *ngFor="let star of getStars(2); let i = index">
+              <i class="bi" [ngClass]="i < 2 ? 'bi-star-fill' : 'bi-star'"></i>
+            </ng-container>
+          </span>
+          {{ product.ratingCounts.count2 }}
+        </div>
+        <div>
+          <span class="stars">
+            <ng-container *ngFor="let star of getStars(1); let i = index">
+              <i class="bi" [ngClass]="i < 1 ? 'bi-star-fill' : 'bi-star'"></i>
+            </ng-container>
+          </span>
+          {{ product.ratingCounts.count1 }}
+        </div>
+      </div>
+      <hr />
+      <div class="seeCustomerReview">
+        <a (click)="openProductDetails(product.productId)" class="cardTitle">See customer review ></a>
+      </div>
+    </span>
+  </p>
+
+  
+</div>

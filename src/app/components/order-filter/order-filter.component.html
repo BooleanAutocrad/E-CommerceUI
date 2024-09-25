@@ -1,0 +1,62 @@
+<div class="example-section">
+  <h4>Filter</h4>
+
+  <mat-checkbox
+    class="example-margin"
+    (change)="onCheckboxChange($event, 'beforeDate')"
+    [checked]="filterType === 'beforeDate'"
+    color="primary"
+    >Orders Before Date</mat-checkbox
+  >
+
+  <mat-checkbox
+    class="example-margin"
+    (change)="onCheckboxChange($event, 'afterDate')"
+    [checked]="filterType === 'afterDate'"
+    color="primary"
+    >Orders After Date</mat-checkbox
+  >
+
+  <mat-checkbox
+    class="example-margin"
+    (change)="onCheckboxChange($event, 'forDate')"
+    [checked]="filterType === 'forDate'"
+    color="primary"
+    >Orders For Date</mat-checkbox
+  >
+
+  <mat-checkbox
+    class="example-margin"
+    (change)="onCheckboxChange($event, 'betweenDates')"
+    [checked]="filterType === 'betweenDates'"
+    color="primary"
+    >Orders Between Dates</mat-checkbox
+  >
+  <div class="dateContainer">
+    <mat-form-field appearance="fill" *ngIf="filterType != 'betweenDates'">
+      <mat-label>Choose a date</mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="specificDate" />
+      <mat-hint>YYYY-MM-DD</mat-hint>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="filterType == 'betweenDates'">
+      <mat-label>Enter a date range</mat-label>
+      <mat-date-range-input [rangePicker]="picker">
+        <input matStartDate placeholder="Start date" [(ngModel)]="startDate" />
+        <input matEndDate placeholder="End date" [(ngModel)]="endDate" />
+      </mat-date-range-input>
+      <mat-hint>YYYY-MM-DD – YYYY-MM-DD</mat-hint>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+    </mat-form-field>
+  </div>
+
+  <button class="btn btn-primary" type="button" (click)="filterOrders()">Apply</button>

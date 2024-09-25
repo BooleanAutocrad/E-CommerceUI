@@ -1,0 +1,12 @@
+.productAndFilterContainer{
+    display: flex;
+    flex-direction: row;
+}
+
+.productFilter{
+    margin-left: 10px;
+}
+
+.homeContainer{
+    min-height: 75vh;
+}

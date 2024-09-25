@@ -1,0 +1,32 @@
+div .success {
+  background-color: rgb(5, 207, 5);
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+  border-radius: 4px;
+}
+div .error {
+  background-color: red;
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+  border-radius: 4px;
+}
+div .warning {
+  background-color: yellow;
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+  border-radius: 4px;
+}
+div .info {
+  background-color: blue;
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+  border-radius: 4px;
+}
+.toast-body {
+    font-size: 15px;
+    font-weight: 500;
+  }

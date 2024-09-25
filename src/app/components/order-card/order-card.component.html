@@ -1,0 +1,36 @@
+<div class="order-card">
+  <div class="order-card-header-container">
+    <div class="order-card-header">
+      <div class="order-date-container">
+        <div>ORDER PLACED</div>
+        <div>
+          {{ order?.orderDate }}
+        </div>
+      </div>
+      <p>Order # {{ order?.orderId }}</p>
+    </div>
+  </div>
+
+  <hr />
+  <div class="order-card-body-container">
+    <div class="order-card-body">
+      <div class="order-items-container">
+        <div *ngFor="let item of order?.orderItems" class="order-item">
+          <div class="productName">
+            <a (click)="openProductDetails(item.product.productId)">{{ item.product.productName }}</a>
+          </div>
+          <div class="quantity">X {{ item.quantity }}</div>
+        </div>
+      </div>
+      <div class="order-total-container">
+        <div>
+
+        </div>
+        <div class="total">
+          <div>TOTAL</div>
+          <div>₹{{ order?.totalAmount }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

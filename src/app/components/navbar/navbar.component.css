@@ -1,0 +1,139 @@
+.navbarContainer {
+  display: flex;
+  width: 75%;
+}
+.container-fluid {
+  margin-left: 100px;
+  display: flex;
+  justify-content: space-between;
+  height: 70px;
+  align-items: center;
+}
+.navbar-brand {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.itemPresent{
+  font-size: 14px;
+}
+hr {
+  margin-top: 0;
+  margin-bottom: 0;
+  opacity: 0.25;
+}
+
+.searchBar {
+  width: 700px;
+  max-height: 40px;
+  margin-top: 10px;
+  margin-left: 50px;
+}
+.searchButton {
+  max-height: 40px;
+  margin-top: 10px;
+}
+.navbar-nav {
+  gap: 40px;
+}
+.searchContainer {
+  width: 60%;
+  margin-right: 80px;
+  display: flex;
+  align-items: center;
+}
+.bi-cart3 {
+  font-size: 26px;
+  font-weight: bold;
+  color: white;
+  margin-right: 10px;
+}
+.cart {
+  font-size: 16px;
+  color: white;
+  display: flex;
+  padding: 5px;
+}
+.bi-person-circle {
+  font-size: 30px;
+}
+
+.nav-item.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.navbar-toggler {
+  margin-right: 10px;
+}
+
+.nav-item.dropdown:hover .dropdown-toggle {
+  background-color: #2a55e5;
+  border-color: #2a55e5;
+  border-radius: 8px;
+  color: white;
+}
+
+.dropdown-toggle {
+  border-radius: 8px;
+}
+
+.nav-item.dropdown .dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  float: left;
+  min-width: 10rem;
+  padding: 0.5rem 0;
+  margin: 0.125rem 0 0;
+  font-size: 1rem;
+  color: #212529;
+  text-align: left;
+  list-style: none;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0.25rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175);
+}
+
+.badge {
+  font-size: 12px;
+  padding: 3px;
+}
+
+.cartAndUser{
+  align-items: baseline;
+}
+.cartContainer{
+  display: flex;
+  background-color: #08A045;
+  align-items: center;
+  border: 1px solid #08A045;
+  border-radius: 10px;
+  padding: 0 5px;
+  cursor: pointer;
+}
+.MyCartText{
+  padding-top: 10px;
+}
+
+@keyframes wiggle {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+  75% {
+    transform: rotate(-5deg);
+  }
+}
+
+.wiggle-on-hover:hover {
+  animation: wiggle 0.5s ease-in-out;
+}

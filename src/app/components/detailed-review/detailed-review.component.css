@@ -1,0 +1,35 @@
+.reviewItem {
+  margin-bottom: 20px;
+  margin-right: 20px;
+  padding: 20px 5px 0 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  min-width: 200px;
+}
+.reviewerRating{
+    color: gold;
+    padding-right: 5px;
+}
+.reviewerRating i{
+    font-size: 20px;
+    margin-right: 5px;
+}
+.reviewList{
+    display: flex;
+    flex-wrap: wrap;
+}
+.bi-person-circle{
+    margin-right: 5px;
+}
+.editReviewButton{
+    padding: 5px 10px;
+}
+.editReview , .addReview{
+    display: flex;
+    justify-content: flex-end; 
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.editReview button{
+    margin-right: 5px;
+}

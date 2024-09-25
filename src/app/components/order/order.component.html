@@ -1,0 +1,14 @@
+<div class="orderContainer">
+  <app-order-filter class="orderFilter" (filterChanged)="handleFilterChange($event.filterType, $event.filterData)"></app-order-filter>
+
+  <div class="order-list" *ngIf="orders != null">
+    <app-order-card
+      *ngFor="let order of orders"
+      [order]="order"
+    ></app-order-card>
+  </div>
+  <div class="order-list-empty" *ngIf="orders == null || orders.length === 0">
+    <p>No orders available.</p>
+  </div>
+</div>
+<app-toast></app-toast>

@@ -1,0 +1,57 @@
+<div class="example-section">
+  <h4>Price Filter</h4>
+
+  <mat-checkbox
+    class="example-margin"
+    (change)="onCheckboxChange($event, 'lt')"
+    [checked]="condition === 'lt'"
+    color="primary"
+    >Price Less Than</mat-checkbox
+  >
+
+  <mat-checkbox
+    class="example-margin"
+    (change)="onCheckboxChange($event, 'lte')"
+    [checked]="condition === 'lte'"
+    color="primary"
+    >Price Less Than or Equal To</mat-checkbox
+  >
+
+  <mat-checkbox
+    class="example-margin"
+    (change)="onCheckboxChange($event, 'eq')"
+    [checked]="condition === 'eq'"
+    color="primary"
+    >Price Equal To</mat-checkbox
+  >
+
+  <mat-checkbox
+    class="example-margin"
+    (change)="onCheckboxChange($event, 'gt')"
+    [checked]="condition === 'gt'"
+    color="primary"
+    >Price Greater Than</mat-checkbox
+  >
+
+  <mat-checkbox
+    class="example-margin"
+    (change)="onCheckboxChange($event, 'gte')"
+    [checked]="condition === 'gte'"
+    color="primary"
+    >Price Greater Than or Equal To</mat-checkbox
+  >
+
+  <div class="priceContainer">
+    <mat-form-field appearance="fill">
+      <mat-label>Enter a price</mat-label>
+      <input matInput type="number" [(ngModel)]="price" min="0" />
+    </mat-form-field>
+  </div>
+
+  <button class="btn btn-primary" type="button" (click)="filterProducts()">
+    Apply
+  </button>
+  <button class="btn btn-danger revertButton" type="button" (click)="revertFilter()">
+    revert
+  </button>
+</div>
