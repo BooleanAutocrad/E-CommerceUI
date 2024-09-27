@@ -7,45 +7,58 @@ import { Status } from 'src/app/models/toastENUM';
 import { Tooltip } from 'bootstrap';
 import { ProductDetailsComponent } from '../product-details/product-details.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { ToastService } from 'src/app/shared/sharedService/ToastService/toast.service';
 
 @Component({
   selector: 'app-product-card',
   templateUrl: './product-card.component.html',
   styleUrls: ['./product-card.component.css'],
 })
-export class ProductCardComponent implements AfterViewInit {
+export class ProductCardComponent {
   @Input()
   product!: Product;
-  @ViewChild(ToastComponent) toastComponent!: ToastComponent;
 
   constructor(
     private cartItemService: CartItemService,
     private cartItemCountService: CartItemCountService,
-    public dialog: MatDialog
+    private router: Router,
+    public dialog: MatDialog,
+    private toastService: ToastService
   ) {}
 
-  ngAfterViewInit() {
-    const tooltipTriggerList = [].slice.call(
-      document.querySelectorAll('[data-bs-toggle="tooltip"]')
-    );
-    tooltipTriggerList.map((tooltipTriggerEl) => {
-      return new Tooltip(tooltipTriggerEl);
-    });
-  }
-
   addToCart(product: Product) {
+    if(!this.checkIfUserLoggedIn()){
+      this.toastService.showToast(
+        'Login Required',
+        'Please login to add product to cart',
+        Status.Error,
+        'Just now',
+        ''
+      );
+      this.router.navigate(['/login']);
+    }
     this.cartItemService.addProductToCartAndIncreaseQuantityIfExists(
       product.productId,
       1
     );
     this.cartItemCountService.increaseNumberOfProducts(1, product.productPrice);
-    this.toastComponent.showToast(
+    this.toastService.showToast(
       'Product added to cart',
       `${product.productName} added to cart`,
       Status.Success,
       'Just now',
       ''
     );
+  }
+
+  private checkIfUserLoggedIn(): boolean {
+    var userObj = JSON.parse(localStorage.getItem('currentUser') as string);
+    if(userObj !== null){
+      return true;
+    } else {
+      return false;
+    }
   }
 
   openProductDetails(productId: number) {

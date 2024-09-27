@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { Status } from 'src/app/models/toastENUM';
+import { ToastService } from 'src/app/shared/sharedService/ToastService/toast.service';
 
 declare var bootstrap: any;
 
@@ -19,12 +20,13 @@ export class ToastComponent implements AfterViewInit{
 
   private toastInstance: any;
 
+  constructor(private toastService: ToastService) { }
+
   ngAfterViewInit() {
-    this.toastInstance = new bootstrap.Toast(this.toastElement.nativeElement);
+    this.toastInstance = new bootstrap.Toast(this.toastElement.nativeElement);    
   }
 
   showToast(title: string, message: string,status:Status, time: string, imageUrl: string | null) {
-    console.log('ToastComponent.showToast() called');
     this.title = title;
     this.status = status
     this.message = message;

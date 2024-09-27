@@ -42,7 +42,6 @@
       <app-rating [product]="product"></app-rating>
     </div>
   </div>
-  <app-detailed-review [product]="product"></app-detailed-review>
+  <app-detailed-review [product]="product" (reviewAdded)="onReviewChange($event)"></app-detailed-review>
 </div>
 
-<app-toast></app-toast>

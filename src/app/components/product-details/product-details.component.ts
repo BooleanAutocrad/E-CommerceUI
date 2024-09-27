@@ -7,6 +7,7 @@ import { CartItemCountService } from 'src/app/shared/sharedService/numberOfProdu
 import { ToastComponent } from '../toast/toast.component';
 import { Status } from 'src/app/models/toastENUM';
 import { Tooltip } from 'bootstrap';
+import { ToastService } from 'src/app/shared/sharedService/ToastService/toast.service';
 
 @Component({
   selector: 'app-product-details',
@@ -24,6 +25,7 @@ export class ProductDetailsComponent implements OnInit, AfterViewInit {
     private productService: ProductService,
     private cartItemService: CartItemService,
     private cartItemCountService: CartItemCountService,
+    private toastService: ToastService,
     public dialog: MatDialog
   ) {
     this.productId = data.productId;
@@ -56,12 +58,16 @@ export class ProductDetailsComponent implements OnInit, AfterViewInit {
       1
     );
     this.cartItemCountService.increaseNumberOfProducts(1, product.productPrice);
-    this.toastComponent.showToast(
+    this.toastService.showToast(
       'Product added to cart',
       `${product.productName} added to cart`,
       Status.Success,
       'Just now',
       ''
     );
+  }
+
+  onReviewChange(review: any) {
+    this.getProductDetails();
   }
 }

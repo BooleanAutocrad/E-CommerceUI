@@ -19,7 +19,7 @@ export class RatingComponent {
     if (totalRating === 0) {
       return 0;
     } else {
-      return (rating / totalRating) * 100;
+      return parseFloat(((rating / totalRating) * 100).toFixed(1));
     }
   }
 }

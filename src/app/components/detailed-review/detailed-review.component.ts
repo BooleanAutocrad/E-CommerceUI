@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Tooltip } from 'bootstrap';
 import { ProductDetails } from 'src/app/models/product/productDetails';
 import { Review } from 'src/app/models/product/review';
@@ -13,6 +13,7 @@ import { ReviewService } from 'src/app/service/review-service/review.service';
 export class DetailedReviewComponent implements OnInit, AfterViewInit {
   @Input()
   product!: ProductDetails;
+  @Output() reviewAdded = new EventEmitter<Review>();
 
   editingReview: Review | null = null;
   hoveredRating: number | null = null;
@@ -106,7 +107,7 @@ export class DetailedReviewComponent implements OnInit, AfterViewInit {
     this.reviewService
       .addReview(this.newReview, this.product.productId)
       .subscribe(() => {
-        console.log('New review added:', this.newReview);
+        this.reviewAdded.emit(this.newReview);
       });
       this.addingNewReview = false;
   }
