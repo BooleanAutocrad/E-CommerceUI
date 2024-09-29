@@ -25,18 +25,36 @@
         </div>
         <div class="price" *ngIf="product.productStock == 0">Out Of Stock</div>
 
-        <div class="addToCartContainer">
+        <div class="addToCartContainer" *ngIf="!isProductInCart(product.productId) || checkIfProductInStockIfNoThenDisable; else quantityButtons">
           <button
             (click)="addToCart(product)"
             class="btn btn-outline-primary addToCartButton"
-            data-bs-toggle="tooltip"
-            data-bs-placement="bottom"
-            data-bs-title="Add to cart"
             [disabled]="product.productStock === 0"
           >
             <i class="bi bi-plus" aria-hidden="true"></i>
           </button>
         </div>
+        <ng-template #quantityButtons>
+          <div class="quantityControl quantityButtons">
+            <button
+              [disabled]="disableIncreaseButton(product)"
+              class="btn btn-outline-success quantityBtn increase"
+              (click)="increaseQuantity(product)"
+            >
+              <i class="bi bi-plus"></i>
+            </button>
+            <span class="quantityDisplay">{{
+              getProductQuantity(product.productId)
+            }}</span>
+    
+            <button
+              class="btn btn-outline-danger quantityBtn decrease"
+              (click)="decreaseQuantity(product)"
+            >
+              <i class="bi bi-dash"></i>
+            </button>
+          </div>
+        </ng-template>
       </div>
 
       <app-rating [product]="product"></app-rating>

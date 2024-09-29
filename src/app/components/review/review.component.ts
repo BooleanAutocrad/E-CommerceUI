@@ -18,6 +18,11 @@ export class ReviewComponent {
   getStars(rating: number): number[] {
     return Array(5).fill(0).map((x, i) => i + 1);
   }
+
+  getAverageRating(): number {
+    return parseFloat((this.product.averageRating).toFixed(1));
+  }
+
   openProductDetails(productId: number) {
     const dialogRef = this.dialog.open(ProductDetailsComponent, {
       width: '60vw',

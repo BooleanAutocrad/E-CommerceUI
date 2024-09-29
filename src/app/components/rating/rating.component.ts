@@ -22,4 +22,8 @@ export class RatingComponent {
       return parseFloat(((rating / totalRating) * 100).toFixed(1));
     }
   }
+
+  getFlooredRating(): number {
+    return Math.floor(this.product.averageRating);
+  }
 }

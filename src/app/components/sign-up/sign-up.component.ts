@@ -4,6 +4,7 @@ import { passwordValidator } from '../../shared/sharedFiles/passwordValidator';
 import { AuthenticationService } from 'src/app/service/auth-service/authentication.service';
 import { newUser } from 'src/app/models/newUser';
 import { UserResponse } from 'src/app/models/user-response';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -16,7 +17,8 @@ export class SignUpComponent {
 
   constructor(
     public authenticationService: AuthenticationService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {
     this.signUpForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(3)]],
@@ -53,10 +55,8 @@ export class SignUpComponent {
         })
         .subscribe((response: UserResponse) => {
           if (response) {
-            console.log('Registration Successful');
-            console.log(response);
             this.signUpForm.reset();
-            // redirectToHome
+            this.router.navigate(['/']);
           } else {
             console.log(response);
             this.signUpError = 'Unable to register';

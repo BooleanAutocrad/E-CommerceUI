@@ -8,11 +8,11 @@
             >
               <i
                 class="bi"
-                [ngClass]="i < product.averageRating ? 'bi-star-fill' : 'bi-star'"
+                [ngClass]="i < getFlooredRating() ? 'bi-star-fill' : 'bi-star'"
               ></i>
             </ng-container>
           </span>
-          {{ product.averageRating }} out of 5
+          {{ getFlooredRating() }} out of 5
         </p>
         <p class="globalRating">{{ product.userReviewCount }} global rating</p>
         <div>

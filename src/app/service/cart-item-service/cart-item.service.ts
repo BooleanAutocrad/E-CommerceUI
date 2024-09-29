@@ -87,6 +87,10 @@ export class CartItemService {
 
   numberOfItemsInCart(): void {
     var userObj = JSON.parse(localStorage.getItem('currentUser') as string);
+    if(userObj == null){
+      console.log('User not logged in');
+      return;
+    }
 
     const url = `/cartitem/count/user/${userObj.userId}`;
     

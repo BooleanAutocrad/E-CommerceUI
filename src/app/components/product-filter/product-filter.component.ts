@@ -22,6 +22,8 @@ export class ProductFilterComponent implements OnInit {
   onCheckboxChange(event: MatCheckboxChange, condition: string): void {
     if (event.checked) {
       this.condition = condition;
+    } else {
+      event.source.checked = true;
     }
   }
 

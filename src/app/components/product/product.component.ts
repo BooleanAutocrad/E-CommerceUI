@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { CartItemCountAndTotalAmount } from 'src/app/models/cart/CartItemCountAndTotalAmount';
+import { ProductDTO } from 'src/app/models/cart/ProductDTO';
 import { Product } from 'src/app/models/product/product';
+import { CartItemService } from 'src/app/service/cart-item-service/cart-item.service';
 import { ProductService } from 'src/app/service/product-service/product.service';
 import { SharedCategoryService } from 'src/app/shared/sharedService/applyCategoryToProducts/shared-category.service';
+import { CartItemCountService } from 'src/app/shared/sharedService/numberOfProductsInCart/cart-item-count.service';
 import { ProductFilterService } from 'src/app/shared/sharedService/sharedProductFilterService/product-filter.service';
 
 @Component({
@@ -11,19 +15,29 @@ import { ProductFilterService } from 'src/app/shared/sharedService/sharedProduct
 })
 export class ProductComponent implements OnInit {
   products: Product[] = [];
+  productsInCart!: ProductDTO[];
 
   currentFilterCondition: any;
 
   constructor(
     private productService: ProductService,
+    private cartItemService: CartItemService,
+    private cartItemCountService: CartItemCountService,
     private productFilterService: ProductFilterService
   ) {}
 
   ngOnInit(): void {
+    this.cartItemService.numberOfItemsInCart();
     
     this.productFilterService.filterState$.subscribe((state) => {
       this.callGetProductsAfterFilter();
     });
+
+    this.cartItemCountService.currentNumberOfProducts.subscribe(
+      (data: CartItemCountAndTotalAmount) => {
+        this.productsInCart = data.products;
+      }
+    );
 
   }
 
@@ -51,7 +65,6 @@ export class ProductComponent implements OnInit {
 
   getProductsAfterFilter(condition: any): void {
     if (condition && condition.price) {
-      // console.log('Price:', condition.price);
       condition.price = parseFloat(condition.price);
       this.callGetProductsAfterFilter();
     }

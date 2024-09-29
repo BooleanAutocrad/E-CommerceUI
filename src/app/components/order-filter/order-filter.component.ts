@@ -22,6 +22,8 @@ export class OrderFilterComponent implements OnInit {
   onCheckboxChange(event: MatCheckboxChange, filterType: string): void {
     if (event.checked) {
       this.filterType = filterType;
+    } else {
+      event.source.checked = true;
     }
   }
 

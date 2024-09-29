@@ -1,4 +1,7 @@
+import { ProductDTO } from "./ProductDTO";
+
 export interface CartItemCountAndTotalAmount {
-    cartItemCount: number;
-    cartTotalAmount: number;
+  cartItemCount: number;
+  cartTotalAmount: number;
+  products: ProductDTO[];
 }

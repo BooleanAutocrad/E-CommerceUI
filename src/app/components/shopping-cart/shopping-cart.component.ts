@@ -56,27 +56,23 @@ export class ShoppingCartComponent {
 
   increaseQuantity(productId: number): void {
     if (this.cart) {
-      this.cart.cartItems.forEach((cartItem) => {
-        if (cartItem.product.productId === productId) {
-          cartItem.quantity++;
-        }
-      });
-      this.calculateTotalAmount();
-
-      this.cartItemCountService.increaseNumberOfProducts(1, this.cart.cartItems.find((cartItem) => cartItem.product.productId === productId)?.product.productPrice as number);
+      const cartItem = this.cart.cartItems.find((item) => item.product.productId === productId);
+      if (cartItem) {
+        cartItem.quantity++;
+        this.calculateTotalAmount();
+        this.cartItemCountService.increaseNumberOfProducts(1, cartItem.product.productPrice, cartItem.product.productId, cartItem.product.productName);
+      }
     }
   }
 
   decreaseQuantity(productId: number): void {
     if (this.cart) {
-      this.cart.cartItems.forEach((cartItem) => {
-        if (cartItem.product.productId === productId) {
-          cartItem.quantity--;
-        }
-      });
-
-      this.calculateTotalAmount();
-      this.cartItemCountService.decreaseNumberOfProducts(1, this.cart.cartItems.find((cartItem) => cartItem.product.productId === productId)?.product.productPrice as number);
+      const cartItem = this.cart.cartItems.find((item) => item.product.productId === productId);
+      if (cartItem) {
+        cartItem.quantity--;
+        this.calculateTotalAmount();
+        this.cartItemCountService.decreaseNumberOfProducts(1, cartItem.product.productPrice, cartItem.product.productId);
+      }
     }
   }
 
@@ -96,7 +92,7 @@ export class ShoppingCartComponent {
         if (cartItem.cartItemId !== cartItemId) {
           return true;
         } else {
-          this.cartItemCountService.decreaseNumberOfProducts(cartItem.quantity, cartItem.product.productPrice);
+          this.cartItemCountService.decreaseNumberOfProducts(cartItem.quantity, cartItem.product.productPrice, cartItem.product.productId);
           return false;
         }
       });
@@ -127,7 +123,7 @@ export class ShoppingCartComponent {
     this.checkAndAddProductToCart();
     this.cartItemService.checkoutCart();
     this.cart = null;
-    this.cartItemCountService.changeNumberOfProducts({cartItemCount: 0, cartTotalAmount: 0});
+    this.cartItemCountService.changeNumberOfProducts({cartItemCount: 0, cartTotalAmount: 0, products: []});
   }
 
   showOrderPlacedAlert(): void {
@@ -180,7 +176,7 @@ export class ShoppingCartComponent {
         if (cartItem.cartItemId !== cartItemId) {
           return true;
         } else {
-          this.cartItemCountService.decreaseNumberOfProducts(cartItem.quantity, cartItem.product.productPrice);
+          this.cartItemCountService.decreaseNumberOfProducts(cartItem.quantity, cartItem.product.productPrice, cartItem.product.productId);
           return false;
         }
       });

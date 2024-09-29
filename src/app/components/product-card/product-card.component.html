@@ -4,12 +4,11 @@
   </div>
   <div class="imageContainer">
     <img
-    width="150"
-    height="150"
+      width="150"
+      height="150"
       src="{{ product.productImageURL }}"
       alt="Card image"
       class="border-0 border-secondary-subtle rounded"
-      
     />
   </div>
 
@@ -22,16 +21,38 @@
   <div class="ratingAndAddToCartContainer">
     <app-review [product]="product"></app-review>
 
-    <button
-      (click)="addToCart(product)"
-      class="btn btn-outline-primary addToCartButton"
-      data-bs-toggle="tooltip"
-      data-bs-placement="bottom"
-      data-bs-title="Add to cart"
-      [disabled]="product.productStock === 0"
-    >
-      <i class="bi bi-plus" aria-hidden="true"></i>
-    </button>
+    <div *ngIf="!isProductInCart(product.productId); else quantityButtons">
+      <button
+        (click)="addToCart(product)"
+        class="btn btn-outline-primary addToCartButton"
+        data-bs-toggle="tooltip"
+        data-bs-placement="bottom"
+        data-bs-title="Add to cart"
+        [disabled]="product.productStock === 0"
+      >
+        <i class="bi bi-plus" aria-hidden="true"></i>
+      </button>
+    </div>
+    <ng-template #quantityButtons>
+      <div class="quantityControl quantityButtons">
+        <button
+          [disabled]="disableIncreaseButton(product)"
+          class="btn btn-outline-success quantityBtn increase"
+          (click)="increaseQuantity(product)"
+        >
+          <i class="bi bi-plus"></i>
+        </button>
+        <span class="quantityDisplay">{{
+          getProductQuantity(product.productId)
+        }}</span>
+
+        <button
+          class="btn btn-outline-danger quantityBtn decrease"
+          (click)="decreaseQuantity(product)"
+        >
+          <i class="bi bi-dash"></i>
+        </button>
+      </div>
+    </ng-template>
   </div>
 </div>
-
