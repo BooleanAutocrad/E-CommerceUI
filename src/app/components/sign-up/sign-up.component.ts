@@ -40,8 +40,6 @@ export class SignUpComponent {
 
   onSubmit(): void {
     if (this.signUpForm.valid) {
-      console.log('Form Submitted', this.signUpForm.value);
-
       const email = this.signUpForm.get('email')?.value;
       const password = this.signUpForm.get('password')?.value;
       const username = this.signUpForm.get('username')?.value;

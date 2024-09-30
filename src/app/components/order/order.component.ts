@@ -4,6 +4,9 @@ import { userOrder } from 'src/app/models/order/userOrder';
 import { OrderService } from 'src/app/service/order-service/order.service';
 import { ToastComponent } from '../toast/toast.component';
 import { Status } from 'src/app/models/toastENUM';
+import { CartItemCountService } from 'src/app/shared/sharedService/numberOfProductsInCart/cart-item-count.service';
+import { ProductDTO } from 'src/app/models/cart/ProductDTO';
+import { CartItemCountAndTotalAmount } from 'src/app/models/cart/CartItemCountAndTotalAmount';
 
 @Component({
   selector: 'app-order',
@@ -12,21 +15,25 @@ import { Status } from 'src/app/models/toastENUM';
 })
 export class OrderComponent implements OnInit {
   orders: userOrder[] = [];
+  productsInCart!: ProductDTO[];
   @ViewChild(ToastComponent) toastComponent!: ToastComponent;
 
-  constructor(private router: Router, private orderService: OrderService) {}
+  constructor(private router: Router, private orderService: OrderService, private cartItemCountService: CartItemCountService) {}
 
   ngOnInit(): void {
     this.getUserOrders();
 
-    var html = '<p>abcc df sdsd f</p>';
+    this.cartItemCountService.currentNumberOfProducts.subscribe(
+      (data: CartItemCountAndTotalAmount) => {
+        this.productsInCart = data.products;
+      }
+    );
   }
 
   getUserOrders(): void {
     this.orderService.getOrders().subscribe(
       (response) => {
         this.orders = response;
-        console.log(response);
       },
       (error) => {
         console.error('Error fetching orders', error);

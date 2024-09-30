@@ -79,13 +79,9 @@ export class UserProfileComponent {
   }
 
   onSubmit(): void {
-    console.log('Form Submitted', this.userData.getRawValue());
-
     if (this.userData.valid) {
       this.authService.updateUser(this.userData.getRawValue()).subscribe(
         response => {
-          console.log('User updated successfully', response);
-          
           this.userData.patchValue({
             userName: response.userName,
             emailId: response.emailId,

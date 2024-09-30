@@ -23,7 +23,7 @@
       </a>
 
       <div class="searchContainer">
-        <form *ngIf="!isLoginPage() && !isProfilePage()" class="d-flex" role="search" (submit)="onSearch()">
+        <form *ngIf="!isLoginPage() && !isProfilePage() && !isCartPage() && !isOrderPage()" class="d-flex" role="search" (submit)="onSearch()">
           <input
             [(ngModel)]="searchQuery"
             class="form-control me-2 searchBar"

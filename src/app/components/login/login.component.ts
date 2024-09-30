@@ -38,18 +38,14 @@ export class LoginComponent {
         .subscribe(
           (response: UserResponse) => {
             if (response) {
-              console.log('Login Successful');
-              console.log(response);
               this.loginError = null;
               this.loginForm.reset();
               this.router.navigate(['/']);
             } else {
-              console.log(response);
               this.loginError = 'Invalid email or password';
             }
           },
           (error: any) => {
-            console.error('Login request failed', error);
             this.loginError = 'Invalid email or password';
           }
         );

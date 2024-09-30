@@ -21,7 +21,6 @@ export class CartItemService {
 
     this.http.put<void>(url, cartItem).subscribe(
       () => {
-        console.log('Product added to cart successfully');
       },
       (error) => {
         console.error('Error adding product to cart', error);
@@ -41,7 +40,6 @@ export class CartItemService {
 
     this.http.put<void>(url, cartItem).subscribe(
       () => {
-        console.log('Product added to cart successfully');
       },
       (error) => {
         console.error('Error adding product to cart', error);
@@ -60,7 +58,6 @@ export class CartItemService {
 
     this.http.delete<void>(url, { headers }).subscribe(
       () => {
-        console.log('Product removed from cart successfully');
       },
       (error) => {
         console.error('Error removing product from cart', error);
@@ -77,7 +74,6 @@ export class CartItemService {
     const url = `/cartitem/checkout/user/${userObj.userId}`;
     this.http.post<void>(url, null, { headers }).subscribe(
       () => {
-        console.log('Cart checked out successfully');
       },
       (error) => {
         console.error('Error checking out cart', error);
@@ -88,7 +84,6 @@ export class CartItemService {
   numberOfItemsInCart(): void {
     var userObj = JSON.parse(localStorage.getItem('currentUser') as string);
     if(userObj == null){
-      console.log('User not logged in');
       return;
     }
 

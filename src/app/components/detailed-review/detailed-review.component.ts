@@ -71,9 +71,9 @@ export class DetailedReviewComponent implements OnInit, AfterViewInit {
 
   saveReview(review: Review): void {
     this.reviewService.editReview(review, this.product.productId);
-    console.log('Saving review:', review);
     this.editingReview = null;
     this.originalReviewData = null;
+    this.reviewAdded.emit(review);
   }
 
   cancelEdit(review: Review): void {

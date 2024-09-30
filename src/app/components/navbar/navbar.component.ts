@@ -44,6 +44,14 @@ export class NavbarComponent implements OnInit {
     return this.router.url === '/profile';
   }
 
+  isCartPage(): boolean {
+    return this.router.url === '/cart';
+  }
+
+  isOrderPage(): boolean {
+    return this.router.url === '/order';
+  }
+
   isUserLoggedIn(): boolean {
     var userObj = JSON.parse(localStorage.getItem('currentUser') as string);
     if (userObj != null) {
@@ -60,12 +68,10 @@ export class NavbarComponent implements OnInit {
 
   onSearch(): void {
     if (this.searchQuery.trim()) {
-      console.log('Search Query:', this.searchQuery);
       this.productFilterService.updateSearchText(this.searchQuery);
 
     } else {
       this.productFilterService.updateSearchText('');
-      console.log('Search query is empty.');
     }
   }
 }

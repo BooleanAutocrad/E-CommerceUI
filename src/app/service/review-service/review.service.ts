@@ -20,7 +20,6 @@ export class ReviewService {
     };
     this.http.put<void>(url, reviewObj).subscribe(
       () => {
-        console.log('Review Edited Successfully');
       },
       (error) => {
         console.error('Error editing review', error);
@@ -28,7 +27,6 @@ export class ReviewService {
     );
   }
   addReview(review: Review, productId: number) {
-    console.log('Review:', review);
     const url = '/review/add';
     var reviewObj = {
       review: review.review,

@@ -5,6 +5,7 @@
     <app-order-card
       *ngFor="let order of orders"
       [order]="order"
+      [productsInCart]="productsInCart"
     ></app-order-card>
   </div>
   <div class="order-list-empty" *ngIf="orders == null || orders.length === 0">

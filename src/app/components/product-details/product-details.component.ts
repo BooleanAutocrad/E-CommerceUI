@@ -5,7 +5,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ProductDetails } from 'src/app/models/product/productDetails';
 import { CartItemService } from 'src/app/service/cart-item-service/cart-item.service';
 import { ProductService } from 'src/app/service/product-service/product.service';
@@ -16,6 +16,7 @@ import { Tooltip } from 'bootstrap';
 import { ToastService } from 'src/app/shared/sharedService/ToastService/toast.service';
 import { ProductDTO } from 'src/app/models/cart/ProductDTO';
 import { Product } from 'src/app/models/product/product';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-details',
@@ -36,7 +37,9 @@ export class ProductDetailsComponent implements OnInit, AfterViewInit {
     private cartItemService: CartItemService,
     private cartItemCountService: CartItemCountService,
     private toastService: ToastService,
-    public dialog: MatDialog
+    private router: Router,
+    public dialog: MatDialog,
+    private dialogRef: MatDialogRef<ProductDetailsComponent>
   ) {
     this.productId = data.productId;
     this.productsInCart = data.productsInCart;
@@ -132,6 +135,19 @@ export class ProductDetailsComponent implements OnInit, AfterViewInit {
   }
 
   addToCart(product: ProductDetails) {
+
+    if (!this.checkIfUserLoggedIn()) {
+      this.toastService.showToast(
+        'Login Required',
+        'Please login to add product to cart',
+        Status.Error,
+        'Just now',
+        ''
+      );
+      this.router.navigate(['/login']);
+      this.dialogRef.close();
+      return;      
+    }
     this.cartItemService.addProductToCartAndIncreaseQuantityIfExists(
       product.productId,
       1
@@ -156,6 +172,15 @@ export class ProductDetailsComponent implements OnInit, AfterViewInit {
       'Just now',
       ''
     );
+  }
+
+  private checkIfUserLoggedIn(): boolean {
+    var userObj = JSON.parse(localStorage.getItem('currentUser') as string);
+    if (userObj !== null) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   onReviewChange(review: any) {

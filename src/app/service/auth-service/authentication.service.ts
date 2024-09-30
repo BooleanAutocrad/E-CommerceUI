@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
 import { newUser } from 'src/app/models/newUser';
 import { UserCredentials } from 'src/app/models/user-credentials';
@@ -14,8 +15,18 @@ export class AuthenticationService {
   public isLoggedIn = false;
   public errorFlag = false;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this.userProfile = new UserResponse();
+  }
+
+  canActivate(): boolean {
+    var userObj = JSON.parse(localStorage.getItem('currentUser') as string);
+    if (userObj && userObj.jwtToken && userObj.jwtToken != null) {
+      return true
+    } else {
+      this.router.navigate(["/"])
+      return false
+    }
   }
 
   logout(): void {

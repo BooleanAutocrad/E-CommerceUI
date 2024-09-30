@@ -8,7 +8,6 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './components/login/login.component';
-import { LoginSignupComponent } from './components/login-signup/login-signup.component';
 import { ProductComponent } from './components/product/product.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { ReviewComponent } from './components/review/review.component';
@@ -40,7 +39,6 @@ import { ProductFilterComponent } from './components/product-filter/product-filt
     SignUpComponent,
     NavbarComponent,
     LoginComponent,
-    LoginSignupComponent,
     ProductComponent,
     ProductCardComponent,
     ReviewComponent,

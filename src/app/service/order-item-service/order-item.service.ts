@@ -19,7 +19,6 @@ export class OrderItemService {
 
     this.http.post<void>(url, orderItem).subscribe(
       () =>{
-        console.log('Order Placed Successfully');
       },
       (error) => {
         console.error('Error placing order', error);

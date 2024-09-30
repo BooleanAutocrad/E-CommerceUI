@@ -10,14 +10,18 @@ import { ProductDetailsComponent } from '../product-details/product-details.comp
 })
 export class OrderCardComponent {
   @Input() order: userOrder | undefined;
+  @Input() productsInCart: any[] | undefined;
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog) {
+    console.log(this.productsInCart);
+  }
 
   openProductDetails(productId: number) {
     const dialogRef = this.dialog.open(ProductDetailsComponent, {
       width: '60vw',
       data: {
         productId: productId,
+        productsInCart: this.productsInCart,
       },
     });
   }
